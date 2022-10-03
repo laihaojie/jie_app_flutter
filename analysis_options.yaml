@@ -14,9 +14,9 @@ analyzer:
     non_constant_identifier_names: warning
 
 dart_code_metrics:
-  anti-patterns:
-    - long-method
-    - long-parameter-list
+  # anti-patterns:
+  #   - long-method
+  #   - long-parameter-list
   metrics:
     cyclomatic-complexity: 20
     maximum-nesting-level: 5
