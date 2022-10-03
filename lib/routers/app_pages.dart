@@ -3,6 +3,8 @@ import 'package:jie_app_flutter/pages/detail_page/detail_controller.dart';
 import 'package:jie_app_flutter/pages/detail_page/detail_page.dart';
 import 'package:jie_app_flutter/pages/detail_page/test1_page.dart';
 import 'package:jie_app_flutter/pages/detail_page/test2_page.dart';
+import 'package:jie_app_flutter/pages/login_page/login_controller.dart';
+import 'package:jie_app_flutter/pages/login_page/login_page.dart';
 import 'package:jie_app_flutter/pages/main_navigation_controller.dart';
 import 'package:jie_app_flutter/pages/main_navigation.dart';
 import 'package:get/get.dart';
@@ -33,6 +35,11 @@ class AppPages {
         //   binding: ChallengeBinding(),
         // ),
       ],
+    ),
+    GetPage(
+      name: AppRouters.login,
+      page: () => const LoginPage(),
+      binding: LoginBinding(),
     ),
     GetPage(
       name: AppRouters.detail,

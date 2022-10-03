@@ -19,4 +19,10 @@ class Api {
   static Future updateTask(Map<String, dynamic> map) async {
     return post('/api/todoList/updateTask', data: map);
   }
+
+  static sendSms(Map<String, Object> map) {}
+
+  static login(Map<String, Object> map) {}
+
+  static getUserInfo() {}
 }

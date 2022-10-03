@@ -26,7 +26,7 @@ class MePage extends GetView<MeController> {
           ),
           ElevatedButton(
             onPressed: (() {
-              Get.toNamed(AppRouters.detail);
+              Get.toNamed(AppRouters.login);
             }),
             child: const Text('跳转到详情页'),
           ),
