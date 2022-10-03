@@ -10,7 +10,6 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('首页')),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
