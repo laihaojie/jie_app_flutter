@@ -14,7 +14,6 @@ class MainNavigation extends GetView<MainNavigationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: GFTabBar(
-        // key: AppPages.globalKey,
         length: 4,
         controller: controller.tabController,
         tabs: const [

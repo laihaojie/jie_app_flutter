@@ -11,6 +11,8 @@ class LoginPage extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    String account = controller.account;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('登录'),
@@ -47,6 +49,7 @@ class LoginPage extends GetView<LoginController> {
                     child: TextField(
                       onChanged: (value) => controller.account = value,
                       keyboardType: TextInputType.number,
+                      controller: TextEditingController(text: account),
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 10),
@@ -76,7 +79,7 @@ class LoginPage extends GetView<LoginController> {
                   Expanded(
                     child: TextField(
                       onChanged: (value) => controller.password = value,
-                      // keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.number,
                       // 密码框 隐藏输入内容
                       obscureText: true,
                       textAlignVertical: TextAlignVertical.center,

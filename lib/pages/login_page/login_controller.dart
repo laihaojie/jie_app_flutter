@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:get/get.dart';
 import 'package:jie_app_flutter/api/api.dart';
 import 'package:jie_app_flutter/models/user_model.dart';
+import 'package:jie_app_flutter/pages/main_navigation_controller.dart';
 import 'package:jie_app_flutter/routers/app_pages.dart';
 import 'package:jie_app_flutter/utils/sp_util.dart';
 import 'package:jie_app_flutter/utils/utils.dart';
@@ -26,7 +27,12 @@ class LoginController extends GetxController {
 
     SpUtil().localSet("user_info", userInfo);
 
-    Get.offAllNamed(AppRouters.main);
+    try {
+      Get.find<MainNavigationController>();
+      Get.back();
+    } catch (e) {
+      Get.offAllNamed(AppRouters.main);
+    }
   }
 }
 

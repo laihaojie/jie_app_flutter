@@ -12,13 +12,10 @@ part 'app_routers.dart';
 
 class AppPages {
   static const initial = AppRouters.main;
-  static var globalKey = GlobalKey<NavigatorState>();
   static final routes = [
     GetPage(
       name: AppRouters.main,
-      page: () => MainNavigation(
-        key: globalKey,
-      ),
+      page: () => const MainNavigation(),
       binding: MainNavigationBinding(),
       children: const [
         // GetPage(

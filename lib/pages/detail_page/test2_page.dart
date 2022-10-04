@@ -17,8 +17,6 @@ class Test2Page extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // 获取 tabController
-
-                  // print((AppPages.globalKey.currentWidget as MainNavigation));
                   Get.until((route) => Get.currentRoute == AppRouters.main);
 
                   final MainNavigationController mainController = Get.find();
