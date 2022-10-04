@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jie_app_flutter/pages/me_page/me_controller.dart';
 import 'package:get/get.dart';
+import 'package:jie_app_flutter/routers/app_pages.dart';
 import 'package:jie_app_flutter/utils/gaps.dart';
 import 'package:jie_preview_image/jie_preview_image.dart';
 
@@ -33,9 +34,10 @@ class MePage extends GetView<MeController> {
             ),
             Gaps.vGap50,
             ListTile(
-              leading: const Icon(Icons.person),
+              onTap: () => Get.toNamed(AppRouters.setting),
+              leading: const Icon(Icons.settings),
               horizontalTitleGap: 0,
-              title: Text(controller.userInfo.nickName),
+              title: const Text('设置'),
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
             ),
           ],

@@ -8,6 +8,7 @@ import 'package:jie_app_flutter/pages/login_page/login_page.dart';
 import 'package:jie_app_flutter/pages/main_navigation_controller.dart';
 import 'package:jie_app_flutter/pages/main_navigation.dart';
 import 'package:get/get.dart';
+import 'package:jie_app_flutter/pages/setting_page/setting_page.dart';
 part 'app_routers.dart';
 
 class AppPages {
@@ -42,6 +43,10 @@ class AppPages {
       name: AppRouters.detail,
       page: () => DetailPage(),
       binding: DetailBinding(),
+    ),
+    GetPage(
+      name: AppRouters.setting,
+      page: () => const SettingPage(),
     ),
     GetPage(name: AppRouters.test1, page: () => const Test1Page()),
     GetPage(name: AppRouters.test2, page: () => const Test2Page()),
