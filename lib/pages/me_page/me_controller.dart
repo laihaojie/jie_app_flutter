@@ -1,29 +1,20 @@
-import 'dart:async';
-
 import 'package:get/get.dart';
+import 'package:jie_app_flutter/api/api.dart';
+import 'package:jie_app_flutter/models/user_model.dart';
+import 'package:jie_app_flutter/utils/sp_util.dart';
 
 class MeController extends GetxController {
-  var count = 0.obs;
+  UserModel userInfo = UserModel.fromJson(SpUtil().localGet('user_info'));
 
-  late final timer;
-
-  @override
-  onInit() {
-    super.onInit();
-    print('MeController onInit');
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      count.value++;
-    });
+  loadData() async {
+    UserModel res = await Api.getUserInfo();
+    userInfo = res;
+    update();
   }
 
   @override
-  onClose() {
-    super.onClose();
-    print('MeController onClose');
-    timer.cancel();
-  }
-
-  add() {
-    count++;
+  void onReady() {
+    super.onReady();
+    loadData();
   }
 }

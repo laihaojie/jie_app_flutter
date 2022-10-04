@@ -4,7 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:jie_app_flutter/common/app_config.dart';
+import 'package:jie_app_flutter/routers/app_pages.dart';
+import 'package:jie_app_flutter/utils/sp_util.dart';
 import 'package:jie_app_flutter/utils/utils.dart';
 import 'requestInterceptor.dart';
 
@@ -90,8 +93,13 @@ class Http {
     }
     if (result.code == 401) {
       // ignore: todo
-      // TODO 401
-      throw "";
+      Utils.toast("登录失效，请重新登录");
+      SpUtil().remove('user_info');
+      SpUtil().remove('token');
+      Get.toNamed(AppRouters.login);
+
+      // cancel future request
+      return Future.error("登录失效，请重新登录");
     }
     if (result.code != null) {
       Fluttertoast.showToast(
