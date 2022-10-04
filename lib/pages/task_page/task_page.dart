@@ -62,119 +62,134 @@ class TaskPage extends GetView<TaskController> {
             FocusScope.of(context).requestFocus(FocusNode());
             controller.isEdit.value = false;
           },
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Gaps.vGap2,
-                Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10),
-                  child: Row(
-                    children: [
-                      for (int i = 0; i < controller.status.length; i++)
-                        Expanded(
-                          child: OutlinedButton(
-                            onPressed: () => controller.index.value = i,
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: controller.index.value == i
-                                  ? AppConfig.mainColor
-                                  : AppConfig.whiteColor,
+          child: Column(
+            children: [
+              Gaps.vGap2,
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  children: [
+                    for (int i = 0; i < controller.status.length; i++)
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => controller.index.value = i,
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: controller.index.value == i
+                                ? AppConfig.mainColor
+                                : AppConfig.whiteColor,
+                          ),
+                          child: Text(
+                            controller.status[i],
+                            style: TextStyle(
+                              color: controller.index.value == i
+                                  ? AppConfig.whiteColor
+                                  : AppConfig.mainColor,
                             ),
-                            child: Text(
-                              controller.status[i],
-                              style: TextStyle(
-                                color: controller.index.value == i
-                                    ? AppConfig.whiteColor
-                                    : AppConfig.mainColor,
-                              ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      for (int index = 0;
+                          index < controller.taskList.length;
+                          index++)
+                        GestureDetector(
+                          onLongPress: () {
+                            controller.currentTask.value =
+                                controller.taskList[index];
+                            controller.isEdit.value = true;
+                            // 一秒后自动获取焦点弹出键盘
+                            Future.delayed(
+                              const Duration(milliseconds: 100),
+                              () {
+                                FocusScope.of(context)
+                                    .requestFocus(controller.node);
+                              },
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              children: [
+                                controller.isEdit.value &&
+                                        controller.currentTask.value.id ==
+                                            controller.taskList[index].id
+                                    ? Expanded(
+                                        child: Focus(
+                                          onFocusChange: (value) {
+                                            if (!value) {
+                                              controller.isEdit.value = false;
+                                              controller.updateTask(
+                                                controller.currentTask.value,
+                                              );
+                                            } else {
+                                              controller.task = controller
+                                                  .currentTask.value.task;
+                                            }
+                                          },
+                                          // autofocus: true,
+                                          child: TextField(
+                                            controller: TextEditingController(
+                                              text: controller
+                                                  .currentTask.value.task,
+                                            ),
+                                            onChanged: (value) =>
+                                                controller.task = value,
+                                            focusNode: controller.node,
+                                            autofocus: true,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  const EdgeInsets.all(10),
+                                              border: const OutlineInputBorder(
+                                                borderSide: BorderSide.none,
+                                              ),
+                                              filled: true,
+                                              fillColor: Colors.grey[50],
+                                              hintText: '请输入代办事项',
+                                              hintStyle: const TextStyle(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : Expanded(
+                                        child: Text(
+                                          controller.taskList[index].task,
+                                          // 溢出省略号
+                                          overflow: TextOverflow.fade,
+                                          style: const TextStyle(
+                                            fontSize: 22,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                GestureDetector(
+                                  onTap: () => _showActions(
+                                    context,
+                                    controller.taskList[index],
+                                  ),
+                                  child: Image.asset(
+                                    'assets/images/dots.png',
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
                     ],
                   ),
                 ),
-                for (int index = 0; index < controller.taskList.length; index++)
-                  GestureDetector(
-                    onLongPress: () {
-                      controller.currentTask.value = controller.taskList[index];
-                      controller.isEdit.value = true;
-                      // 一秒后自动获取焦点弹出键盘
-                      Future.delayed(const Duration(milliseconds: 100), () {
-                        FocusScope.of(context).requestFocus(controller.node);
-                      });
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          controller.isEdit.value &&
-                                  controller.currentTask.value.id ==
-                                      controller.taskList[index].id
-                              ? Expanded(
-                                  child: Focus(
-                                    onFocusChange: (value) {
-                                      if (!value) {
-                                        controller.isEdit.value = false;
-                                        controller.updateTask(
-                                          controller.currentTask.value,
-                                        );
-                                      } else {
-                                        controller.task =
-                                            controller.currentTask.value.task;
-                                      }
-                                    },
-                                    // autofocus: true,
-                                    child: TextField(
-                                      controller: TextEditingController(
-                                        text: controller.currentTask.value.task,
-                                      ),
-                                      onChanged: (value) =>
-                                          controller.task = value,
-                                      focusNode: controller.node,
-                                      autofocus: true,
-                                      decoration: InputDecoration(
-                                        contentPadding:
-                                            const EdgeInsets.all(10),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                        ),
-                                        filled: true,
-                                        fillColor: Colors.grey[50],
-                                        hintText: '请输入代办事项',
-                                        hintStyle:
-                                            const TextStyle(color: Colors.grey),
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Expanded(
-                                  child: Text(
-                                    controller.taskList[index].task,
-                                    // 溢出省略号
-                                    overflow: TextOverflow.fade,
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                          GestureDetector(
-                            onTap: () => _showActions(
-                              context,
-                              controller.taskList[index],
-                            ),
-                            child: Image.asset(
-                              'assets/images/dots.png',
-                              width: 20,
-                              height: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
