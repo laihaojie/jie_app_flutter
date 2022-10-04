@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:jie_app_flutter/common/app_config.dart';
 import 'package:jie_app_flutter/pages/login_page/login_controller.dart';
@@ -12,54 +13,44 @@ class LoginPage extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('注册-登录'),
+        title: const Text('登录'),
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(40),
+        padding: const EdgeInsets.only(left: 40, right: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               'assets/images/logo.png',
-              width: 80,
-              height: 80,
+              width: 100,
+              height: 100,
             ),
-            Gaps.vGap32,
+            Gaps.vGap24,
             Container(
               padding: const EdgeInsets.only(bottom: 4),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(
-                    color: Utils.color("#BBBBBB"),
-                    width: 1,
-                  ),
+                  bottom: BorderSide(color: Utils.color("#BBBBBB")),
                 ),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: 20,
-                    height: 20,
+                  const Icon(
+                    Icons.phone_android,
+                    color: Colors.grey,
                   ),
                   Gaps.hGap10,
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {
-                        controller.mobile.value = value;
-                      },
+                      onChanged: (value) => controller.account = value,
                       keyboardType: TextInputType.number,
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(
-                          top: 0,
-                          bottom: 0,
-                          left: 10,
-                        ),
-                        hintText: "请输入手机号",
+                        contentPadding: const EdgeInsets.only(left: 10),
+                        hintText: "请输入账号",
                         hintStyle: TextStyle(color: Utils.color("#DCDCDC")),
                         border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
@@ -74,35 +65,29 @@ class LoginPage extends GetView<LoginController> {
               padding: const EdgeInsets.only(bottom: 4),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(
-                    color: Utils.color("#BBBBBB"),
-                    width: 1,
-                  ),
+                  bottom: BorderSide(color: Utils.color("#BBBBBB")),
                 ),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/images/logo.png',
-                    width: 20,
-                    height: 20,
-                  ),
+                  const Icon(Icons.remove_red_eye, color: Colors.grey),
                   Gaps.hGap10,
                   Expanded(
                     child: TextField(
-                      onChanged: (value) {
-                        controller.code.value = value;
-                      },
-                      keyboardType: TextInputType.number,
+                      onChanged: (value) => controller.password = value,
+                      // keyboardType: TextInputType.number,
+                      // 密码框 隐藏输入内容
+                      obscureText: true,
                       textAlignVertical: TextAlignVertical.center,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(6),
+                        // FilteringTextInputFormatter.digitsOnly,
+                        // FilteringTextInputFormatter.allow(RegExp("[0-9]")),
+                      ],
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.only(
-                          top: 0,
-                          bottom: 0,
-                          left: 10,
-                        ),
-                        hintText: "请输入验证码",
+                        contentPadding: const EdgeInsets.only(left: 10),
+                        hintText: "请输入密码",
                         hintStyle: TextStyle(color: Utils.color("#DCDCDC")),
                         border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
@@ -110,54 +95,19 @@ class LoginPage extends GetView<LoginController> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (controller.countdownTimer != null) {
-                        return;
-                      }
-                      controller.sendSms();
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        controller.countdownTimer != null
-                            ? Utils.color("#ccc")
-                            : AppConfig.mainColor,
-                      ),
-                      overlayColor: MaterialStateProperty.resolveWith((states) {
-                        return controller.countdownTimer != null
-                            ? Colors.transparent
-                            : Colors.white24;
-                      }),
-                    ),
-                    child: Text(controller.countdownTimer != null
-                        ? "${controller.seconds}s"
-                        : "获取验证"),
-                  ),
                 ],
               ),
             ),
-            Gaps.vGap10,
             Gaps.vGap32,
-            Center(
-              child: InkWell(
-                onTap: () {
-                  controller.login();
-                },
-                child: Container(
-                  // 蓝色背景的按钮
-                  decoration: BoxDecoration(
-                    color: AppConfig.mainColor,
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  width: 300,
-                  height: 50,
-                  child: const Center(
-                    child: Text(
-                      '登录 | 注册',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
+            SizedBox(
+              width: 300,
+              height: 48,
+              child: ElevatedButton(
+                onPressed: () => controller.login(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConfig.mainColor,
                 ),
+                child: const Text('登录', style: TextStyle(fontSize: 16)),
               ),
             ),
           ],

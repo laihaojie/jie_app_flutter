@@ -8,14 +8,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await SpUtil().init();
-  SpUtil().localSet(
-    'token',
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJyb2xlIjoxLCJpYXQiOjE2NjMwMzc4NDIsImV4cCI6MTY2NTYyOTg0Mn0.0TaepUA78lTQygH3So6bDFOgV99dC9CTWWrrUJgRX4U",
-  );
-
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute: AppPages.initial,
+    initialRoute:
+        SpUtil().localGet('token') == null ? AppRouters.login : AppRouters.main,
     getPages: AppPages.routes,
   ));
 }

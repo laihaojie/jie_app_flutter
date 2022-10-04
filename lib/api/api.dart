@@ -1,4 +1,5 @@
 import 'package:jie_app_flutter/models/task_model.dart';
+import 'package:jie_app_flutter/models/user_model.dart';
 import 'package:jie_app_flutter/utils/request.dart';
 
 class Api {
@@ -20,9 +21,11 @@ class Api {
     return post('/api/todoList/updateTask', data: map);
   }
 
-  static sendSms(Map<String, Object> map) {}
+  static Future login(Map<String, Object> data) async {
+    return await post('/api/account/login', data: data);
+  }
 
-  static login(Map<String, Object> map) {}
-
-  static getUserInfo() {}
+  static Future<UserModel> getUserInfo() async {
+    return UserModel.fromJson(await get('/api/account/info'));
+  }
 }
