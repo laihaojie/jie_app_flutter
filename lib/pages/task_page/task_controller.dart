@@ -19,7 +19,9 @@ class TaskController extends GetxController {
 
   var isEdit = false.obs;
   late var currentTask = taskList.first.obs;
-  var note = FocusNode();
+  var node = FocusNode();
+  var editNode = FocusNode();
+  var textEditingController = TextEditingController();
 
   Future<void> getTaskList() async {
     List<TaskModel> res = await Api.getTaskList({'status': index.value + 1});
@@ -29,6 +31,7 @@ class TaskController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    textEditingController.text = isEdit.value ? '' : task;
     index.listen((value) {
       isEdit.value = false;
       getTaskList();
@@ -42,6 +45,7 @@ class TaskController extends GetxController {
     }
     await Api.saveTask({'task': task});
     getTaskList();
+    editNode.unfocus();
   }
 
   void updateTaskStatus(TaskModel item, int i) async {

@@ -8,6 +8,7 @@ import 'package:jie_app_flutter/pages/task_page/task_controller.dart';
 class MainNavigationController extends GetxController
     with GetSingleTickerProviderStateMixin {
   var count = 10.obs;
+  var currentIndex = 0.obs;
 
   late var tabController = TabController(length: 4, vsync: this);
   late var arg = Get.arguments;
@@ -34,6 +35,7 @@ class MainNavigationController extends GetxController
   }
 
   onChange() {
+    currentIndex.value = tabController.index;
     title.value = tabs[tabController.index];
   }
 

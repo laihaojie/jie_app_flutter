@@ -23,13 +23,10 @@ class TaskPage extends GetView<TaskController> {
                 height: 40,
                 child: TextField(
                   cursorHeight: 20,
-                  onChanged: (value) {
-                    print('111111111111111111111');
-                    controller.task = controller.isEdit.value ? '' : value;
-                  },
-                  controller: TextEditingController(
-                    text: controller.isEdit.value ? '' : controller.task,
-                  ),
+                  onChanged: (value) =>
+                      controller.task = controller.isEdit.value ? '' : value,
+                  focusNode: controller.editNode,
+                  controller: controller.textEditingController,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(10),
                     border: OutlineInputBorder(
@@ -46,9 +43,7 @@ class TaskPage extends GetView<TaskController> {
             ),
             Gaps.hGap15,
             ElevatedButton(
-              onPressed: () {
-                controller.saveTask();
-              },
+              onPressed: () => controller.saveTask(),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppConfig.whiteColor,
               ),
@@ -79,9 +74,7 @@ class TaskPage extends GetView<TaskController> {
                       for (int i = 0; i < controller.status.length; i++)
                         Expanded(
                           child: OutlinedButton(
-                            onPressed: () {
-                              controller.index.value = i;
-                            },
+                            onPressed: () => controller.index.value = i,
                             style: OutlinedButton.styleFrom(
                               backgroundColor: controller.index.value == i
                                   ? AppConfig.mainColor
@@ -107,7 +100,7 @@ class TaskPage extends GetView<TaskController> {
                       controller.isEdit.value = true;
                       // 一秒后自动获取焦点弹出键盘
                       Future.delayed(const Duration(milliseconds: 100), () {
-                        FocusScope.of(context).requestFocus(controller.note);
+                        FocusScope.of(context).requestFocus(controller.node);
                       });
                     },
                     child: Padding(
@@ -121,7 +114,7 @@ class TaskPage extends GetView<TaskController> {
                                   child: Focus(
                                     onFocusChange: (value) {
                                       if (!value) {
-                                        // controller.isEdit.value = false;
+                                        controller.isEdit.value = false;
                                         controller.updateTask(
                                           controller.currentTask.value,
                                         );
@@ -135,10 +128,9 @@ class TaskPage extends GetView<TaskController> {
                                       controller: TextEditingController(
                                         text: controller.currentTask.value.task,
                                       ),
-                                      onChanged: (value) {
-                                        controller.task = value;
-                                      },
-                                      focusNode: controller.note,
+                                      onChanged: (value) =>
+                                          controller.task = value,
+                                      focusNode: controller.node,
                                       autofocus: true,
                                       decoration: InputDecoration(
                                         contentPadding:
@@ -167,9 +159,10 @@ class TaskPage extends GetView<TaskController> {
                                   ),
                                 ),
                           GestureDetector(
-                            onTap: () {
-                              _showActions(context, controller.taskList[index]);
-                            },
+                            onTap: () => _showActions(
+                              context,
+                              controller.taskList[index],
+                            ),
                             child: Image.asset(
                               'assets/images/dots.png',
                               width: 20,
@@ -293,6 +286,7 @@ class TaskPage extends GetView<TaskController> {
                               TextButton(
                                 onPressed: () {
                                   controller.updateTaskStatus(item, 0);
+                                  Navigator.pop(context);
                                   Navigator.pop(context);
                                 },
                                 child: const Text('确定'),
