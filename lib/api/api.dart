@@ -8,6 +8,10 @@ class Api {
     return await get('/api/test');
   }
 
+  static Future checkVersion() async {
+    return await get('/api/public/androidVersion');
+  }
+
   static Future<List<TaskModel>> getTaskList(data) async {
     return (await get('/api/todoList/taskList', params: data) as List)
         .map((e) => TaskModel.fromJson(e))
