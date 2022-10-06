@@ -17,7 +17,7 @@ jobs:
         with:
           flutter-version: 3.3.4
       - run: flutter pub get
-      - run: flutter build apk
+      - run: flutter build apk --split-per-abi
 
       - uses: manyuanrong/setup-ossutil@v2.0
         with:
