@@ -15,9 +15,7 @@ void checkUpdate() async {
           content: const Text('是否更新'),
           actions: [
             TextButton(
-              onPressed: () {
-                Get.back();
-              },
+              onPressed: () => Get.back(),
               child: const Text('取消'),
             ),
             TextButton(
@@ -51,9 +49,7 @@ Future<Map<String, dynamic>> checkVersion() async {
 
   String version = res['devVersion'];
   String devVersion = SpUtil().localGet('dev_version') ?? '';
-  if (version == devVersion) {
-    return {};
-  }
+  if (devVersion.isEmpty || version == devVersion) return {};
 
   return res;
 }
