@@ -49,7 +49,13 @@ Future<Map<String, dynamic>> checkVersion() async {
 
   String version = res['devVersion'];
   String devVersion = SpUtil().localGet('dev_version') ?? '';
-  if (devVersion.isEmpty || version == devVersion) return {};
+  if (version == devVersion) return {};
+  // 第一次安装 保存版本号
+  if (devVersion.isEmpty) {
+    SpUtil().localSet('dev_version', version);
+
+    return {};
+  }
 
   return res;
 }
