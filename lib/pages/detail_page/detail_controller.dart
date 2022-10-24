@@ -1,5 +1,8 @@
-import 'package:jie_app_flutter/routers/app_pages.dart';
+// ignore_for_file: avoid_print
+
 import 'package:get/get.dart';
+
+import '../../routers/app_pages.dart';
 
 class DetailController extends GetxController {
   var name = 'DetailController'.obs;

@@ -1,14 +1,15 @@
-import 'package:flutter/cupertino.dart';
-import 'package:jie_app_flutter/pages/detail_page/detail_controller.dart';
-import 'package:jie_app_flutter/pages/detail_page/detail_page.dart';
-import 'package:jie_app_flutter/pages/detail_page/test1_page.dart';
-import 'package:jie_app_flutter/pages/detail_page/test2_page.dart';
-import 'package:jie_app_flutter/pages/login_page/login_controller.dart';
-import 'package:jie_app_flutter/pages/login_page/login_page.dart';
-import 'package:jie_app_flutter/pages/main_navigation_controller.dart';
-import 'package:jie_app_flutter/pages/main_navigation.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/pages/setting_page/setting_page.dart';
+
+import '../pages/detail_page/detail_controller.dart';
+import '../pages/detail_page/detail_page.dart';
+import '../pages/detail_page/test1_page.dart';
+import '../pages/detail_page/test2_page.dart';
+import '../pages/login_page/login_controller.dart';
+import '../pages/login_page/login_page.dart';
+import '../pages/main_navigation.dart';
+import '../pages/main_navigation_controller.dart';
+import '../pages/setting_page/setting_page.dart';
+
 part 'app_routers.dart';
 
 class AppPages {
@@ -18,6 +19,7 @@ class AppPages {
       name: AppRouters.main,
       page: () => const MainNavigation(),
       binding: MainNavigationBinding(),
+      // ignore: avoid_redundant_argument_values
       children: const [
         // GetPage(
         //   name: AppRouters.home,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/routers/app_pages.dart';
-import 'package:jie_app_flutter/utils/sp_util.dart';
+import '../../routers/app_pages.dart';
+import '../../utils/sp_util.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({super.key});

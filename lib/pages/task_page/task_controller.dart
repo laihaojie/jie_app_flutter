@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/api/api.dart';
-import 'package:jie_app_flutter/models/task_model.dart';
-import 'package:jie_app_flutter/utils/utils.dart';
+import '../../api/api.dart';
+import '../../models/task_model.dart';
+import '../../utils/utils.dart';
 
 class TaskController extends GetxController {
   var taskList = <TaskModel>[].obs;
@@ -24,7 +24,8 @@ class TaskController extends GetxController {
   var textEditingController = TextEditingController();
 
   Future<void> getTaskList() async {
-    List<TaskModel> res = await Api.getTaskList({'status': index.value + 1});
+    final List<TaskModel> res =
+        await Api.getTaskList({'status': index.value + 1});
     taskList.assignAll(res);
   }
 
@@ -41,35 +42,35 @@ class TaskController extends GetxController {
 
   saveTask() async {
     if (task.isEmpty) {
-      return Utils.toast("请输入代办事项");
+      return Utils.toast('请输入代办事项');
     }
     await Api.saveTask({'task': task});
     getTaskList();
     editNode.unfocus();
   }
 
-  void updateTaskStatus(TaskModel item, int i) async {
+  Future<void> updateTaskStatus(TaskModel item, int i) async {
     await Api.updateTask({'id': item.id, 'status': i});
     getTaskList();
-    Utils.toast("修改成功");
+    Utils.toast('修改成功');
   }
 
-  void updateTask(TaskModel item) async {
-    var i = task;
+  Future<void> updateTask(TaskModel item) async {
+    final inputTask = task;
     task = '';
-    if (i.isEmpty) {
-      return Utils.toast("请输入代办事项");
+    if (inputTask.isEmpty) {
+      return Utils.toast('请输入代办事项');
     }
-    if (item.task == i) {
-      return Utils.toast("未修改");
+    if (item.task == inputTask) {
+      return Utils.toast('未修改');
     }
     await Api.updateTask({
       'id': item.id,
       'status': item.status,
-      'task': i,
+      'task': inputTask,
     });
     isEdit.value = false;
     getTaskList();
-    Utils.toast("修改成功");
+    Utils.toast('修改成功');
   }
 }

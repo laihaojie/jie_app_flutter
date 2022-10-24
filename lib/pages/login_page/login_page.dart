@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/common/app_config.dart';
-import 'package:jie_app_flutter/pages/login_page/login_controller.dart';
-import 'package:jie_app_flutter/utils/gaps.dart';
-import 'package:jie_app_flutter/utils/utils.dart';
+
+import '../../common/app_config.dart';
+import '../../utils/gaps.dart';
+import '../../utils/utils.dart';
+import 'login_controller.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    String account = controller.account;
+    final String account = controller.account;
 
     return Scaffold(
       appBar: AppBar(
@@ -22,7 +23,6 @@ class LoginPage extends GetView<LoginController> {
         padding: const EdgeInsets.only(left: 40, right: 40),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               'assets/images/logo.png',
@@ -34,11 +34,10 @@ class LoginPage extends GetView<LoginController> {
               padding: const EdgeInsets.only(bottom: 4),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(color: Utils.color("#BBBBBB")),
+                  bottom: BorderSide(color: Utils.color('#BBBBBB')),
                 ),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(
                     Icons.phone_android,
@@ -53,8 +52,8 @@ class LoginPage extends GetView<LoginController> {
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 10),
-                        hintText: "请输入账号",
-                        hintStyle: TextStyle(color: Utils.color("#DCDCDC")),
+                        hintText: '请输入账号',
+                        hintStyle: TextStyle(color: Utils.color('#DCDCDC')),
                         border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
                         ),
@@ -68,11 +67,10 @@ class LoginPage extends GetView<LoginController> {
               padding: const EdgeInsets.only(bottom: 4),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(color: Utils.color("#BBBBBB")),
+                  bottom: BorderSide(color: Utils.color('#BBBBBB')),
                 ),
               ),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const Icon(Icons.remove_red_eye, color: Colors.grey),
                   Gaps.hGap10,
@@ -90,8 +88,8 @@ class LoginPage extends GetView<LoginController> {
                       ],
                       decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(left: 10),
-                        hintText: "请输入密码",
-                        hintStyle: TextStyle(color: Utils.color("#DCDCDC")),
+                        hintText: '请输入密码',
+                        hintStyle: TextStyle(color: Utils.color('#DCDCDC')),
                         border: const OutlineInputBorder(
                           borderSide: BorderSide.none,
                         ),

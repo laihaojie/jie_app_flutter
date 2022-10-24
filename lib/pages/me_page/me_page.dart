@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:jie_app_flutter/pages/me_page/me_controller.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/routers/app_pages.dart';
-import 'package:jie_app_flutter/utils/gaps.dart';
 import 'package:jie_preview_image/jie_preview_image.dart';
 
+import '../../routers/app_pages.dart';
+import '../../utils/gaps.dart';
+import 'me_controller.dart';
+
 class MePage extends GetView<MeController> {
-  final TabController tabbarController;
   const MePage(this.tabbarController, {super.key});
+  final TabController tabbarController;
 
   @override
   Widget build(BuildContext context) {

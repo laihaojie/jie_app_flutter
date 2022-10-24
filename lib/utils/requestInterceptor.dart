@@ -1,5 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:dio/dio.dart';
-import 'package:jie_app_flutter/utils/sp_util.dart';
+import 'sp_util.dart';
 
 class RequestInterceptor extends Interceptor {
   @override
@@ -10,8 +12,8 @@ class RequestInterceptor extends Interceptor {
     //     "token": SpUtil().localGet("token")
     //   },
     // );
-    options.headers["Content-Type"] = "application/json";
-    options.headers["token"] = SpUtil().localGet("token");
+    options.headers['Content-Type'] = 'application/json';
+    options.headers['token'] = SpUtil().localGet('token');
 
     return super.onRequest(options, handler);
   }

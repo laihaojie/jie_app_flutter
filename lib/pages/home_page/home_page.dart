@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:jie_app_flutter/api/api.dart';
-import 'package:jie_app_flutter/pages/home_page/home_controller.dart';
 import 'package:get/get.dart';
 
+import '../../api/api.dart';
+import 'home_controller.dart';
+
 class HomePage extends GetView<HomeController> {
-  final TabController tabbarController;
   const HomePage(this.tabbarController, {super.key});
+  final TabController tabbarController;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class HomePage extends GetView<HomeController> {
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
-            var res = await Api.test();
+            final res = await Api.test();
             print(res);
           },
           child: const Text('首页'),

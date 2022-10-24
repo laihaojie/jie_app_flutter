@@ -5,23 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svprogresshud/flutter_svprogresshud.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:jie_app_flutter/common/app_config.dart';
-import 'package:jie_app_flutter/routers/app_pages.dart';
-import 'package:jie_app_flutter/utils/sp_util.dart';
-import 'package:jie_app_flutter/utils/utils.dart';
+
+import '../common/app_config.dart';
+import '../routers/app_pages.dart';
 import 'requestInterceptor.dart';
+import 'sp_util.dart';
+import 'utils.dart';
 
 // ignore: prefer-match-file-name
 class Http {
-  static final Http _instance = Http._internal();
   factory Http() => _instance;
-
-  static late final Dio dio;
-
-  List<CancelToken?> pendingRequest = [];
-
   Http._internal() {
-    BaseOptions options = BaseOptions();
+    final BaseOptions options = BaseOptions();
 
     dio = Dio(options);
     dio.options.baseUrl = AppConfig.baseUrl;
@@ -30,10 +25,15 @@ class Http {
     // 添加request拦截器
     dio.interceptors.add(RequestInterceptor());
   }
+  static final Http _instance = Http._internal();
+
+  static late final Dio dio;
+
+  List<CancelToken?> pendingRequest = [];
 
   Future request(
     String path, {
-    String method = "GET",
+    String method = 'GET',
     Map<String, dynamic>? params,
     data,
     Options? options,
@@ -52,15 +52,15 @@ class Http {
     requestOptions = requestOptions.copyWith(
       method: method,
       extra: {
-        "refresh": refresh,
-        "noCache": noCache,
-        "cacheKey": cacheKey,
-        "cacheDisk": cacheDisk,
+        'refresh': refresh,
+        'noCache': noCache,
+        'cacheKey': cacheKey,
+        'cacheDisk': cacheDisk,
       },
     );
 
     Response response;
-    CancelToken dioCancelToken = createDioCancelToken(cancelToken);
+    final CancelToken dioCancelToken = createDioCancelToken(cancelToken);
     response = await dio
         .request(
       path,
@@ -93,25 +93,25 @@ class Http {
     }
     if (result.code == 401) {
       // ignore: todo
-      Utils.toast("登录失效，请重新登录");
+      Utils.toast('登录失效，请重新登录');
       SpUtil().remove('user_info');
       SpUtil().remove('token');
       Get.toNamed(AppRouters.login);
 
       // cancel future request
-      return Future.error("登录失效，请重新登录");
+      return Future.error('登录失效，请重新登录');
     }
     if (result.code != null) {
       Fluttertoast.showToast(
-        msg: result.message ?? "服务器繁忙",
+        msg: result.message ?? '服务器繁忙',
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Utils.color("#ccc"),
+        backgroundColor: Utils.color('#ccc'),
         textColor: Colors.white,
         fontSize: 16.0,
       );
 
+      // ignore: no-empty-block
       return Future.error(() {});
     }
 
@@ -138,7 +138,7 @@ class Http {
   }) async {
     return request(
       path,
-      method: "POST",
+      method: 'POST',
       params: params,
       data: data,
       isLoading: isLoading,
@@ -147,11 +147,13 @@ class Http {
 
   // 获取cancelToken , 根据传入的参数查看使用者是否有动态传入cancel，没有就生成一个
   CancelToken createDioCancelToken(CancelToken? cancelToken) {
-    CancelToken token = cancelToken ?? CancelToken();
+    final CancelToken token = cancelToken ?? CancelToken();
     pendingRequest.add(token);
+
     return token;
   }
 
+  // ignore: unused_element
   _convertRequestData(data) {
     if (data != null) {
       data = jsonDecode(jsonEncode(data));
@@ -162,21 +164,20 @@ class Http {
 }
 
 class ApiResponse {
-  int? code;
-  dynamic data;
-  String? message;
-
   ApiResponse({
     this.code,
     this.data,
     this.message,
   });
-
   ApiResponse.fromJson(Map<String, dynamic> json) {
     code = json['code'];
     data = json['data'];
     message = json['message'];
   }
+  int? code;
+  // ignore: avoid-dynamic
+  dynamic data;
+  String? message;
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};

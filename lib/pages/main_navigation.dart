@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:jie_app_flutter/common/app_config.dart';
-import 'package:jie_app_flutter/pages/home_page/home_page.dart';
-import 'package:jie_app_flutter/pages/main_navigation_controller.dart';
-import 'package:jie_app_flutter/pages/me_page/me_page.dart';
 import 'package:get/get.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:jie_app_flutter/pages/note_page/note_page.dart';
-import 'package:jie_app_flutter/pages/task_page/task_page.dart';
+
+import '../common/app_config.dart';
+import 'home_page/home_page.dart';
+import 'main_navigation_controller.dart';
+import 'me_page/me_page.dart';
+import 'note_page/note_page.dart';
+import 'task_page/task_page.dart';
 
 class MainNavigation extends GetView<MainNavigationController> {
   const MainNavigation({super.key});
@@ -30,7 +31,7 @@ class MainNavigation extends GetView<MainNavigationController> {
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
-                  "首页",
+                  '首页',
                   style: TextStyle(
                     color: controller.currentIndex.value == 0
                         ? AppConfig.mainColor
@@ -48,7 +49,7 @@ class MainNavigation extends GetView<MainNavigationController> {
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
-                  "任务",
+                  '任务',
                   style: TextStyle(
                     color: controller.currentIndex.value == 1
                         ? AppConfig.mainColor
@@ -66,7 +67,7 @@ class MainNavigation extends GetView<MainNavigationController> {
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
-                  "笔记",
+                  '笔记',
                   style: TextStyle(
                     color: controller.currentIndex.value == 2
                         ? AppConfig.mainColor
@@ -84,7 +85,7 @@ class MainNavigation extends GetView<MainNavigationController> {
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
-                  "我的",
+                  '我的',
                   style: TextStyle(
                     color: controller.currentIndex.value == 3
                         ? AppConfig.mainColor

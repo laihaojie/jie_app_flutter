@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/api/api.dart';
-import 'package:jie_app_flutter/models/note_model.dart';
-import 'package:jie_app_flutter/utils/utils.dart';
+import '../../api/api.dart';
+import '../../models/note_model.dart';
+import '../../utils/utils.dart';
 
 class NoteController extends GetxController {
   var noteList = <NoteModel>[].obs;
@@ -18,7 +18,7 @@ class NoteController extends GetxController {
   var textEditingController = TextEditingController();
 
   Future<void> getNoteList() async {
-    List<NoteModel> res = await Api.getNoteList();
+    final List<NoteModel> res = await Api.getNoteList();
     noteList.assignAll(res);
   }
 
@@ -35,7 +35,7 @@ class NoteController extends GetxController {
 
   saveNote() async {
     if (note.isEmpty) {
-      return Utils.toast("请输入代办事项");
+      return Utils.toast('请输入代办事项');
     }
     await Api.saveNote({'text': note});
     textEditingController.text = '';
@@ -43,27 +43,27 @@ class NoteController extends GetxController {
     getNoteList();
   }
 
-  void removeNote(NoteModel item) async {
+  Future<void> removeNote(NoteModel item) async {
     await Api.removeNote({'id': item.id});
     getNoteList();
-    Utils.toast("删除成功");
+    Utils.toast('删除成功');
   }
 
-  void updateNote(NoteModel item) async {
-    var i = note;
+  Future<void> updateNote(NoteModel item) async {
+    final inputNote = note;
     note = '';
-    if (i.isEmpty) {
-      return Utils.toast("请输入代办事项");
+    if (inputNote.isEmpty) {
+      return Utils.toast('请输入代办事项');
     }
-    if (item.text == i) {
-      return Utils.toast("未修改");
+    if (item.text == inputNote) {
+      return Utils.toast('未修改');
     }
     await Api.updateNote({
       'id': item.id,
-      'text': i,
+      'text': inputNote,
     });
     isEdit.value = false;
     getNoteList();
-    Utils.toast("修改成功");
+    Utils.toast('修改成功');
   }
 }

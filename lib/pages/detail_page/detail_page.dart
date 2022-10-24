@@ -1,7 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
-import 'package:jie_app_flutter/pages/detail_page/detail_controller.dart';
-import 'package:jie_app_flutter/pages/home_page/home_controller.dart';
 import 'package:get/get.dart';
+
+import '../home_page/home_controller.dart';
+import 'detail_controller.dart';
 
 class DetailPage extends GetView<DetailController> {
   DetailPage({super.key});

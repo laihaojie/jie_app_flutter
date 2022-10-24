@@ -1,11 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jie_app_flutter/api/api.dart';
-import 'package:jie_app_flutter/utils/sp_util.dart';
 import 'package:ota_update/ota_update.dart';
 
-void checkUpdate() async {
-  var data = await checkVersion();
+import '../api/api.dart';
+import 'sp_util.dart';
+
+Future<void> checkUpdate() async {
+  final data = await checkVersion();
   if (data.isNotEmpty) {
     showDialog(
       context: Get.context!,
@@ -32,7 +35,7 @@ void checkUpdate() async {
   }
 }
 
-void downloadApk(data) async {
+Future<void> downloadApk(data) async {
   showDialog(
     context: Get.context!,
     builder: (context) {
@@ -45,10 +48,10 @@ void downloadApk(data) async {
 }
 
 Future<Map<String, dynamic>> checkVersion() async {
-  var res = await Api.checkVersion();
+  final res = await Api.checkVersion();
 
-  String version = res['devVersion'];
-  String devVersion = SpUtil().localGet('dev_version') ?? '';
+  final String version = res['devVersion'];
+  final String devVersion = SpUtil().localGet('dev_version') ?? '';
   if (version == devVersion) return {};
   // 第一次安装 保存版本号
   if (devVersion.isEmpty) {
@@ -62,8 +65,8 @@ Future<Map<String, dynamic>> checkVersion() async {
 
 // ignore: prefer-match-file-name
 class DownLoadProgress extends StatefulWidget {
-  final Map<String, dynamic> data;
   const DownLoadProgress(this.data, {super.key});
+  final Map<String, dynamic> data;
 
   @override
   State<DownLoadProgress> createState() => _DownLoadProgressState();

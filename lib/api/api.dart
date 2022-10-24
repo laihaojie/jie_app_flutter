@@ -1,7 +1,7 @@
-import 'package:jie_app_flutter/models/note_model.dart';
-import 'package:jie_app_flutter/models/task_model.dart';
-import 'package:jie_app_flutter/models/user_model.dart';
-import 'package:jie_app_flutter/utils/request.dart';
+import '../models/note_model.dart';
+import '../models/task_model.dart';
+import '../models/user_model.dart';
+import '../utils/request.dart';
 
 class Api {
   static Future<String> test() async {
@@ -9,7 +9,7 @@ class Api {
   }
 
   static Future checkVersion() async {
-    return await get('/api/public/androidVersion');
+    return get('/api/public/androidVersion');
   }
 
   static Future<List<TaskModel>> getTaskList(data) async {
@@ -33,7 +33,7 @@ class Api {
   }
 
   static Future login(Map<String, Object> data) async {
-    return await post('/api/account/login', data: data);
+    return post('/api/account/login', data: data);
   }
 
   static Future<UserModel> getUserInfo() async {
@@ -41,7 +41,7 @@ class Api {
   }
 
   static Future removeNote(data) async {
-    return await post('/api/todoList/removeText', data: data);
+    return post('/api/todoList/removeText', data: data);
   }
 
   static Future saveNote(Map<String, dynamic> map) async {
