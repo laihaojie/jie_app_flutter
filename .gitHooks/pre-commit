@@ -10,7 +10,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 判断上一条命令输出结果中是否包含"STYLE"，如果包含则返回0，否则返回1
-if [[ $(flutter pub run dart_code_metrics:metrics analyze lib) =~ "STYLE" ]]; then
+if [[ $(flutter pub run dart_code_metrics:metrics analyze lib --reporter=checkstyle) =~ "error" ]]; then
     echo "代码规范不通过，请检查后再提交 dart_code_metrics "
     # unstash the unstashed changes
     git stash pop -q
