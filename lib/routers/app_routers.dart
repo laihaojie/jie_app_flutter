@@ -7,6 +7,8 @@ abstract class AppRouters {
 
   static const me = '/me';
 
+  static const webview = '/webview';
+
   static const detail = '/detail';
 
   static const test1 = '/test1';

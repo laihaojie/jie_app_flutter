@@ -43,6 +43,7 @@ dependencies:
   shared_preferences: ^2.0.13
   flutter_svprogresshud: ^1.0.0
   ota_update: ^4.0.1
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

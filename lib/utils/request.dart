@@ -96,7 +96,7 @@ class Http {
       Utils.toast('登录失效，请重新登录');
       SpUtil().remove('user_info');
       SpUtil().remove('token');
-      Get.toNamed(AppRouters.login);
+      Get.offAllNamed(AppRouters.login);
 
       // cancel future request
       return Future.error('登录失效，请重新登录');

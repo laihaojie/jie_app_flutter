@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../api/api.dart';
+import '../webview_page/webview_page.dart';
 import 'home_controller.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -14,12 +15,25 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            final res = await Api.test();
-            print(res);
-          },
-          child: const Text('首页'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () async {
+                final res = await Api.test();
+                print(res);
+              },
+              child: const Text('测试'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Get.to(
+                  () => const WebviewPage(url: 'http://www.laihaojie.com'),
+                );
+              },
+              child: const Text('去百度'),
+            ),
+          ],
         ),
       ),
     );

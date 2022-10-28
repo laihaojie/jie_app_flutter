@@ -9,6 +9,7 @@ import '../pages/login_page/login_page.dart';
 import '../pages/main_navigation.dart';
 import '../pages/main_navigation_controller.dart';
 import '../pages/setting_page/setting_page.dart';
+import '../pages/webview_page/webview_page.dart';
 
 part 'app_routers.dart';
 
@@ -49,6 +50,10 @@ class AppPages {
     GetPage(
       name: AppRouters.setting,
       page: () => const SettingPage(),
+    ),
+    GetPage(
+      name: AppRouters.webview,
+      page: () => WebviewPage(url: Get.arguments),
     ),
     GetPage(name: AppRouters.test1, page: () => const Test1Page()),
     GetPage(name: AppRouters.test2, page: () => const Test2Page()),
