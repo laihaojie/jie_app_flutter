@@ -31,7 +31,23 @@ class HomePage extends GetView<HomeController> {
                   () => const WebviewPage(url: 'http://www.laihaojie.com'),
                 );
               },
-              child: const Text('去百度'),
+              child: const Text('打开网站'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Get.to(
+                  () => const WebviewPage(url: 'https://muyu.laihaojie.com'),
+                );
+              },
+              child: const Text('木鱼'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                Get.to(
+                  () => const WebviewPage(url: 'https://bdd.laihaojie.com'),
+                );
+              },
+              child: const Text('冰墩墩'),
             ),
           ],
         ),
