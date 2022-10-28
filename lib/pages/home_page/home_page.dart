@@ -25,30 +25,15 @@ class HomePage extends GetView<HomeController> {
               },
               child: const Text('测试'),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                Get.to(
-                  () => const WebviewPage(url: 'http://www.laihaojie.com'),
-                );
-              },
-              child: const Text('打开网站'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                Get.to(
-                  () => const WebviewPage(url: 'https://muyu.laihaojie.com'),
-                );
-              },
-              child: const Text('木鱼'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                Get.to(
-                  () => const WebviewPage(url: 'https://bdd.laihaojie.com'),
-                );
-              },
-              child: const Text('冰墩墩'),
-            ),
+            for (int idx = 0; idx < controller.websiteList.length; idx++)
+              ElevatedButton(
+                onPressed: () {
+                  Get.to(
+                    () => WebviewPage(url: controller.websiteList[idx]['url']!),
+                  );
+                },
+                child: Text(controller.websiteList[idx]['name']!),
+              ),
           ],
         ),
       ),

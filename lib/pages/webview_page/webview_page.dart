@@ -23,7 +23,6 @@ class _WebviewPageState extends State<WebviewPage> {
   @override
   Widget build(BuildContext context) {
     return WebView(
-      backgroundColor: Colors.red,
       initialUrl: widget.url,
     );
   }
