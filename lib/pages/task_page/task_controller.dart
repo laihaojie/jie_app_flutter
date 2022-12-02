@@ -24,8 +24,7 @@ class TaskController extends GetxController {
   var textEditingController = TextEditingController();
 
   Future<void> getTaskList() async {
-    final List<TaskModel> res =
-        await Api.getTaskList({'status': index.value + 1});
+    final List<TaskModel> res = await Api.getTaskList({'status': index.value + 1});
     taskList.assignAll(res);
   }
 

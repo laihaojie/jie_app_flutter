@@ -2,8 +2,7 @@
 
 import 'package:get/get.dart';
 
-class HomeController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController with GetSingleTickerProviderStateMixin {
   var counter = 0.obs;
 
   var websiteList = [

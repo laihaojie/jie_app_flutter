@@ -5,9 +5,7 @@ import 'sp_util.dart';
 
 class Utils {
   static Color color([String code = '#999999']) {
-    if (code.isEmpty ||
-        code[0] != '#' ||
-        (code.length != 4 && code.length != 7)) {
+    if (code.isEmpty || code[0] != '#' || (code.length != 4 && code.length != 7)) {
       throw ArgumentError('传的字符串格式错误: $code');
     }
     if (code.length == 4) {
@@ -105,16 +103,45 @@ class Utils {
     return true;
   }
 
-  static bool testMobile(String mobile) =>
-      RegExp(r'^1[0123456789]\d{9}$').hasMatch(mobile);
+  static bool testMobile(String mobile) => RegExp(r'^1[0123456789]\d{9}$').hasMatch(mobile);
 
-  static bool testEmail(String email) =>
-      RegExp(r'^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$')
-          .hasMatch(email);
+  static bool testEmail(String email) => RegExp(r'^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$').hasMatch(email);
 
   static bool get isLogin => SpUtil().localGet('token') != null;
 
   static Future<bool> checkLogin() async {
     return SpUtil().localGet('token') != null;
+  }
+
+  static String getDateDiff(String date) {
+    final DateTime now = DateTime.now();
+    final DateTime date1 = DateTime.parse(date);
+    final Duration diff = now.difference(date1);
+    final int dayDiff = diff.inDays;
+    if (dayDiff < 0) {
+      return '';
+    }
+    if (dayDiff == 0) {
+      if (diff.inHours == 0) {
+        if (diff.inMinutes < 1) {
+          return '刚刚';
+        }
+
+        return '${diff.inMinutes}分钟前';
+      }
+
+      return '${diff.inHours}小时前';
+    }
+    if (dayDiff < 7) {
+      return '$dayDiff天前';
+    }
+    if (dayDiff < 30) {
+      return '${(dayDiff / 7).floor()}周前';
+    }
+    if (dayDiff < 365) {
+      return '${(dayDiff / 30).floor()}月前';
+    }
+
+    return '${(dayDiff / 365).floor()}年前';
   }
 }

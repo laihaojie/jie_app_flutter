@@ -13,15 +13,11 @@ class Api {
   }
 
   static Future<List<TaskModel>> getTaskList(data) async {
-    return (await get('/api/todoList/taskList', params: data) as List)
-        .map((e) => TaskModel.fromJson(e))
-        .toList();
+    return (await get('/api/todoList/taskList', params: data) as List).map((e) => TaskModel.fromJson(e)).toList();
   }
 
   static Future<List<NoteModel>> getNoteList() async {
-    return (await get('/api/todoList/textList') as List)
-        .map((e) => NoteModel.fromJson(e))
-        .toList();
+    return (await get('/api/todoList/textList') as List).map((e) => NoteModel.fromJson(e)).toList();
   }
 
   static Future saveTask(Map<String, dynamic> map) async {

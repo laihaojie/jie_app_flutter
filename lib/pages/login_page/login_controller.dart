@@ -20,8 +20,7 @@ class LoginController extends GetxController {
     if (password.isEmpty) {
       return Utils.toast('请输入密码');
     }
-    final String token =
-        await Api.login({'account': account, 'password': password});
+    final String token = await Api.login({'account': account, 'password': password});
     SpUtil().localSet('token', token);
     SpUtil().localSet('account', account);
 

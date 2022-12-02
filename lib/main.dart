@@ -16,8 +16,7 @@ void main() async {
 
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
-    initialRoute:
-        SpUtil().localGet('token') == null ? AppRouters.login : AppRouters.main,
+    initialRoute: SpUtil().localGet('token') == null ? AppRouters.login : AppRouters.main,
     getPages: AppPages.routes,
   ));
 }

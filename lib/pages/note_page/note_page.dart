@@ -24,8 +24,7 @@ class NotePage extends GetView<NoteController> {
                 child: TextField(
                   cursorHeight: 20,
                   focusNode: controller.editNote,
-                  onChanged: (value) =>
-                      controller.note = controller.isEdit.value ? '' : value,
+                  onChanged: (value) => controller.note = controller.isEdit.value ? '' : value,
                   controller: controller.textEditingController,
                   decoration: const InputDecoration(
                     contentPadding: EdgeInsets.all(10),
@@ -80,9 +79,7 @@ class NotePage extends GetView<NoteController> {
                       padding: const EdgeInsets.all(10),
                       child: Row(
                         children: [
-                          if (controller.isEdit.value &&
-                              controller.currentNote.value.id ==
-                                  controller.noteList[index].id)
+                          if (controller.isEdit.value && controller.currentNote.value.id == controller.noteList[index].id)
                             Expanded(
                               child: Focus(
                                 onFocusChange: (value) {
@@ -92,8 +89,7 @@ class NotePage extends GetView<NoteController> {
                                       controller.currentNote.value,
                                     );
                                   } else {
-                                    controller.note =
-                                        controller.currentNote.value.text;
+                                    controller.note = controller.currentNote.value.text;
                                   }
                                 },
                                 // autofocus: true,
@@ -112,8 +108,7 @@ class NotePage extends GetView<NoteController> {
                                     filled: true,
                                     fillColor: Colors.grey[50],
                                     hintText: '请输入代办事项',
-                                    hintStyle:
-                                        const TextStyle(color: Colors.grey),
+                                    hintStyle: const TextStyle(color: Colors.grey),
                                   ),
                                 ),
                               ),

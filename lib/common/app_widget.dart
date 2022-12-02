@@ -16,8 +16,6 @@ class AppWidget {
     double size,
     Color? color,
   ) {
-    return color == null
-        ? Text(content, style: TextStyle(fontSize: size))
-        : Text(content, style: TextStyle(fontSize: size, color: color));
+    return color == null ? Text(content, style: TextStyle(fontSize: size)) : Text(content, style: TextStyle(fontSize: size, color: color));
   }
 }

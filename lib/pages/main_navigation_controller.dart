@@ -8,8 +8,7 @@ import 'me_page/me_controller.dart';
 import 'note_page/note_controller.dart';
 import 'task_page/task_controller.dart';
 
-class MainNavigationController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class MainNavigationController extends GetxController with GetSingleTickerProviderStateMixin {
   var count = 10.obs;
   var currentIndex = 0.obs;
 

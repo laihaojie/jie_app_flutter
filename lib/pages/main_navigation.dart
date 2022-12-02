@@ -25,17 +25,13 @@ class MainNavigation extends GetView<MainNavigationController> {
                 icon: Icon(
                   Icons.home,
                   size: 30,
-                  color: controller.currentIndex.value == 0
-                      ? AppConfig.mainColor
-                      : AppConfig.color333,
+                  color: controller.currentIndex.value == 0 ? AppConfig.mainColor : AppConfig.color333,
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
                   '首页',
                   style: TextStyle(
-                    color: controller.currentIndex.value == 0
-                        ? AppConfig.mainColor
-                        : AppConfig.color333,
+                    color: controller.currentIndex.value == 0 ? AppConfig.mainColor : AppConfig.color333,
                   ),
                 ),
               ),
@@ -43,17 +39,13 @@ class MainNavigation extends GetView<MainNavigationController> {
                 icon: Icon(
                   Icons.bar_chart_sharp,
                   size: 30,
-                  color: controller.currentIndex.value == 1
-                      ? AppConfig.mainColor
-                      : AppConfig.color333,
+                  color: controller.currentIndex.value == 1 ? AppConfig.mainColor : AppConfig.color333,
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
                   '任务',
                   style: TextStyle(
-                    color: controller.currentIndex.value == 1
-                        ? AppConfig.mainColor
-                        : AppConfig.color333,
+                    color: controller.currentIndex.value == 1 ? AppConfig.mainColor : AppConfig.color333,
                   ),
                 ),
               ),
@@ -61,17 +53,13 @@ class MainNavigation extends GetView<MainNavigationController> {
                 icon: Icon(
                   Icons.note,
                   size: 30,
-                  color: controller.currentIndex.value == 2
-                      ? AppConfig.mainColor
-                      : AppConfig.color333,
+                  color: controller.currentIndex.value == 2 ? AppConfig.mainColor : AppConfig.color333,
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
                   '笔记',
                   style: TextStyle(
-                    color: controller.currentIndex.value == 2
-                        ? AppConfig.mainColor
-                        : AppConfig.color333,
+                    color: controller.currentIndex.value == 2 ? AppConfig.mainColor : AppConfig.color333,
                   ),
                 ),
               ),
@@ -79,17 +67,13 @@ class MainNavigation extends GetView<MainNavigationController> {
                 icon: Icon(
                   Icons.book,
                   size: 30,
-                  color: controller.currentIndex.value == 3
-                      ? AppConfig.mainColor
-                      : AppConfig.color333,
+                  color: controller.currentIndex.value == 3 ? AppConfig.mainColor : AppConfig.color333,
                 ),
                 iconMargin: const EdgeInsets.only(bottom: 4),
                 child: Text(
                   '我的',
                   style: TextStyle(
-                    color: controller.currentIndex.value == 3
-                        ? AppConfig.mainColor
-                        : AppConfig.color333,
+                    color: controller.currentIndex.value == 3 ? AppConfig.mainColor : AppConfig.color333,
                   ),
                 ),
               ),

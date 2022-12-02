@@ -23,8 +23,7 @@ class TaskPage extends GetView<TaskController> {
                 height: 40,
                 child: TextField(
                   cursorHeight: 20,
-                  onChanged: (value) =>
-                      controller.task = controller.isEdit.value ? '' : value,
+                  onChanged: (value) => controller.task = controller.isEdit.value ? '' : value,
                   focusNode: controller.editNode,
                   controller: controller.textEditingController,
                   decoration: const InputDecoration(
@@ -74,16 +73,12 @@ class TaskPage extends GetView<TaskController> {
                         child: OutlinedButton(
                           onPressed: () => controller.index.value = idx,
                           style: OutlinedButton.styleFrom(
-                            backgroundColor: controller.index.value == idx
-                                ? AppConfig.mainColor
-                                : AppConfig.whiteColor,
+                            backgroundColor: controller.index.value == idx ? AppConfig.mainColor : AppConfig.whiteColor,
                           ),
                           child: Text(
                             controller.status[idx],
                             style: TextStyle(
-                              color: controller.index.value == idx
-                                  ? AppConfig.whiteColor
-                                  : AppConfig.mainColor,
+                              color: controller.index.value == idx ? AppConfig.whiteColor : AppConfig.mainColor,
                             ),
                           ),
                         ),
@@ -96,20 +91,16 @@ class TaskPage extends GetView<TaskController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      for (int index = 0;
-                          index < controller.taskList.length;
-                          index++)
+                      for (int index = 0; index < controller.taskList.length; index++)
                         GestureDetector(
                           onLongPress: () {
-                            controller.currentTask.value =
-                                controller.taskList[index];
+                            controller.currentTask.value = controller.taskList[index];
                             controller.isEdit.value = true;
                             // 一秒后自动获取焦点弹出键盘
                             Future.delayed(
                               const Duration(milliseconds: 100),
                               () {
-                                FocusScope.of(context)
-                                    .requestFocus(controller.node);
+                                FocusScope.of(context).requestFocus(controller.node);
                               },
                             );
                           },
@@ -117,9 +108,7 @@ class TaskPage extends GetView<TaskController> {
                             padding: const EdgeInsets.all(10),
                             child: Row(
                               children: [
-                                if (controller.isEdit.value &&
-                                    controller.currentTask.value.id ==
-                                        controller.taskList[index].id)
+                                if (controller.isEdit.value && controller.currentTask.value.id == controller.taskList[index].id)
                                   Expanded(
                                     child: Focus(
                                       onFocusChange: (value) {
@@ -129,23 +118,19 @@ class TaskPage extends GetView<TaskController> {
                                             controller.currentTask.value,
                                           );
                                         } else {
-                                          controller.task =
-                                              controller.currentTask.value.task;
+                                          controller.task = controller.currentTask.value.task;
                                         }
                                       },
                                       // autofocus: true,
                                       child: TextField(
                                         controller: TextEditingController(
-                                          text:
-                                              controller.currentTask.value.task,
+                                          text: controller.currentTask.value.task,
                                         ),
-                                        onChanged: (value) =>
-                                            controller.task = value,
+                                        onChanged: (value) => controller.task = value,
                                         focusNode: controller.node,
                                         autofocus: true,
                                         decoration: InputDecoration(
-                                          contentPadding:
-                                              const EdgeInsets.all(10),
+                                          contentPadding: const EdgeInsets.all(10),
                                           border: const OutlineInputBorder(
                                             borderSide: BorderSide.none,
                                           ),
